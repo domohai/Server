@@ -18,10 +18,11 @@ public class Main {
             // Đợi cho tới khi một kết nối được thực hiện tới,
             // sau đó accept nó, tạo ra và trả về một socket object mới
             Socket socket = serverSocket.accept();
+            System.out.println("Client accepted");
             // a bufferedReader to read input from client
             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             // a writer to return result to client
-            PrintWriter output = new PrintWriter(socket.getOutputStream());
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
             
             while (true) {
                 String inString = input.readLine();
