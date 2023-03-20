@@ -1,4 +1,7 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -15,8 +18,20 @@ public class Main {
             // Đợi cho tới khi một kết nối được thực hiện tới,
             // sau đó accept nó, tạo ra và trả về một socket object mới
             Socket socket = serverSocket.accept();
+            // a bufferedReader to read input from client
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            // a writer to return result to client
+            PrintWriter output = new PrintWriter(socket.getOutputStream());
             
-            
+            while (true) {
+                String inString = input.readLine();
+                // check if the client want to disconnect
+                if (inString.equals("quit")) break;
+                // todo: normalize here
+                
+                // return result to client
+                output.println("Echo from server: " + inString);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
