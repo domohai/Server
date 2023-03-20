@@ -28,10 +28,12 @@ public class Main {
                 String inString = input.readLine();
                 // check if the client want to disconnect
                 if (inString.equals("quit")) break;
-                // todo: normalize here
-                
+                System.out.println("Input String: " + inString);
+                // normalize
+                inString = inString.toLowerCase().trim();
+                inString = inString.substring(0, 1).toUpperCase() + inString.substring(1);
                 // return result to client
-                output.println("Echo from server: " + inString);
+                output.println("Result from server: " + inString);
             }
         } catch (IOException e) {
             e.printStackTrace();
