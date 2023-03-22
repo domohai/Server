@@ -7,7 +7,7 @@ import java.net.Socket;
 public class SubThread extends Thread {
     private Socket socket;
     private int clientID;
-    private static int count = 0;
+    private static int count = -1;
     
     public SubThread(Socket socket) {
         this.socket = socket;

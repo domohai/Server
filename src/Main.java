@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,7 +42,7 @@ public class Main {
             e.printStackTrace();
         }
         */
-        
+        Arrays.sort(NormalizeString.separators);
         // multi-thread
         try (ServerSocket serverSocket = new ServerSocket(6969)) {
             while (true) new SubThread(serverSocket.accept()).start();
