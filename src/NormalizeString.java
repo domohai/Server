@@ -2,6 +2,10 @@ public class NormalizeString {
     public static String normalize(String input) {
         input = input.toLowerCase().trim();
         input = input.replaceAll("\\s+", " ");
+        input = input.replaceAll("\\.+", ".");
+        input = input.replaceAll("\\?+", "?");
+        input = input.replaceAll("\\!+", "!");
+        input = input.replaceAll("\\ .+", ".");
         String temp = input;
         for (int i = 0; i < temp.length(); i++) {
             if (input.charAt(i) == '.') {
