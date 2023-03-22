@@ -7,6 +7,8 @@ import java.net.Socket;
 
 public class Main {
     public static void main(String[] args) {
+        // single thread
+        // drawback: only 1 client can access server at a time
         /**
          * 0-1023: System ports
          * 1024-49151: User ports
@@ -14,9 +16,10 @@ public class Main {
          * Why choose port 6969?
          * https://stackoverflow.com/questions/218839/assigning-tcp-ip-ports-for-in-house-application-use
          */
+        /*
         try (ServerSocket serverSocket = new ServerSocket(6969)) {
-            // Đợi cho tới khi một kết nối được thực hiện tới,
-            // sau đó accept nó, tạo ra và trả về một socket object mới
+            // wait until a client connect to the server
+            // then accept the connection and return a socket object
             Socket socket = serverSocket.accept();
             System.out.println("Client accepted");
             // a bufferedReader to read input from client
@@ -30,11 +33,18 @@ public class Main {
                 if (inString.equals("quit")) break;
                 System.out.println("Input String: " + inString);
                 // normalize
-                inString = inString.toLowerCase().trim();
-                inString = inString.substring(0, 1).toUpperCase() + inString.substring(1);
+                inString = NormalizeString(inString);
                 // return result to client
                 output.println("Result from server: " + inString);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+        
+        // multi-thread
+        try (ServerSocket serverSocket = new ServerSocket(6969)) {
+            while (true) new SubThread(serverSocket.accept()).start();
         } catch (IOException e) {
             e.printStackTrace();
         }
